@@ -207,3 +207,45 @@ LAr = calculate_LAr(pressure)
 
 #print to test calculators
 print(E1P)
+
+#////
+#Recombination Factor
+#////
+
+def calculate_t(T, Tc):
+    t = (1 - (T/Tc))
+    return t
+
+def calculate_density(pc, A, t, B, C, D):
+    density = pc * math.exp(A * (t**0.334) + B * (t**(2/3)) + C * (t**(7/3)) + D * (t**4))
+    return density
+
+def calculate_ε(E, density):
+    ε = E * density
+    return ε
+    
+ε = calculate_ε(E, density) 
+
+def calculate_recombination_factor(A3t, k3t, ε, mean_rate):
+    recombination_factor = (A3t)/(1+(k3t/ε)*(mean_rate))  # Added missing closing parenthesis
+    return recombination_factor 
+
+recombination_factor = calculate_recombination_factor(A3t, k3t, ε, mean_rate)
+
+#Parameters
+Tc = 150.687 #(K)
+pc = 0.5356 #(g/cm^3)
+A = 1.5004262
+B = -0.31381290
+C = 0.086461622
+D = -0.041477525
+A3t = 0.8
+k3t = 0.0486  
+
+#Input values
+E = 3
+mean_rate = 2.13
+T = 80 #(K)
+
+print(density)
+print(recombination_factor)
