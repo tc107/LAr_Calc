@@ -227,7 +227,7 @@ def calculate_ε(E, density):
 ε = calculate_ε(E, density) 
 
 def calculate_recombination_factor(A3t, k3t, ε, mean_rate):
-    recombination_factor = (A3t)/(1+(k3t/ε)*(mean_rate))  # Added missing closing parenthesis
+    recombination_factor = (A3t)/(1+(k3t/ε)*(mean_rate)) 
     return recombination_factor 
 
 recombination_factor = calculate_recombination_factor(A3t, k3t, ε, mean_rate)
