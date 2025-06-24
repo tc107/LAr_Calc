@@ -243,9 +243,41 @@ A3t = 0.8
 k3t = 0.0486  
 
 #Input values
-E = 3
-mean_rate = 2.13
+E = 3 #(kV/cm)
+mean_rate = 2.13 #(MeV/cm)
 T = 80 #(K)
 
 print(density)
 print(recombination_factor)
+
+#////
+#Effective Longitudinal Electron Energy
+#////
+
+def calculate_E(E_field):
+    E = E_field / 1 #(kV/cm) this will cancel out units
+    return E
+
+E = calculate_E(E_field)
+
+def calculate_ϵ(b0, b1, b2, b3, T1, T, E):
+    numerator = b0 + (b1 * E) + (b2 * E**2)
+    denominator = 1 + ((b1 / b0) * E) + (b3 * E**2)
+    multiplication_factor = T/T1
+    ϵ = (numerator / denominator) * multiplication_factor
+    return ϵ
+
+ϵ = calculate_ϵ(b0, b1, b2, b3, T1, T, E)
+
+#parameters
+b0 = 0.0075
+b1 = 742.9
+b2 = 3269.6
+b3 = 31678.2
+T1 = 87 #(K)
+
+#Input Values
+E_field = 0.3 #(kV/cm) 
+T = 89 #(K)
+
+print(ϵ)
